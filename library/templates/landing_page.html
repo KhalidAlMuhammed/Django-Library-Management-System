@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Welcome to the Library Management System</h1>
+    <p class="text-center">Manage your library efficiently!</p>
+
+    <form method="GET" action="{% url 'landing_page' %}">
+        <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control" placeholder="Search...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="column">
+        <div class="col-md-12">
+            <h2>Libraries</h2>
+            <div class="row">
+                {% for library in libraries %}
+                <div class="col-md-4">
+                    <a href="{% url 'library_detail' library.pk %}" style="text-decoration: none; color:black">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ library.name }}</h5>
+                            <p class="card-text">Address: {{ library.address }}</p>
+                            <p class="card-text">Contact: {{ library.contact }}</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <p>No libraries found.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <h2>Genres</h2>
+            <div class="row">
+                {% for genre in genres %}
+                <div class="col-md-4">
+                    <a href="{% url 'genre_detail' genre %}" style="text-decoration: none; color:black">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ genre }}</h5>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <p>No genres found.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h2>Books</h2>
+            <div class="row">
+                {% for book in books %}
+                <div class="col-md-4">
+                    <a href="{% url 'book_detail' book.pk %}" style="text-decoration: none; color:black">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.title }}</h5>
+                                <p class="card-text">Author: {{ book.author.name }}</p>
+                                <p class="card-text">Genre: {{ book.genre }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <p>No books found.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <h2>Authors</h2>
+            <div class="row">
+                {% for author in authors %}
+                <div class="col-md-3">
+                    <a href="{% url 'author_detail' author.pk %}" style="text-decoration: none; color:black">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ author.name }}</h5>
+                            <p class="card-text">Contact: {{ author.contact }}</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <p>No authors found.</p>
+                </div>
+                {% endfor %}
+            </div>        
+        </div>
+    </div>
+</div>
+{% endblock %}

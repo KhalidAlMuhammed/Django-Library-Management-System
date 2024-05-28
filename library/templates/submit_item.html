@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Submit New Item</h2>
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form method="POST" action="{% url 'submit_item' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="item_type">Select Item Type:</label>
+            <select name="item_type" id="item_type" class="form-control">
+                <option value="book" selected>Book</option>
+                <option value="column">Column</option>
+                <option value="shelf">Shelf</option>
+                <option value="group">Group</option>
+                <option value="library">Library</option>
+            </select>
+        </div>
+        <div id="form_fields"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script src="{% static 'js/submit_item.js' %}"></script>
+{% endblock %}

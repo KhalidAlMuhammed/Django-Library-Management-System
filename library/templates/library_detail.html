@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ library.name }}</h2>
+    <p>Address: {{ library.address }}</p>
+    <p>Contact: {{ library.contact }}</p>
+    <p>Description: {{ library.description }}</p>
+    <!-- Add more details as needed -->
+</div>
+{% endblock %}
